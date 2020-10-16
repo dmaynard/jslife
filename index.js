@@ -5,7 +5,9 @@ import { universe_width } from "wasm-game-of-life/wasm_game_of_life_bg.wasm";
 
 const pre = document.getElementById("game-of-life-canvas");
 const gob = document.getElementById("go-button");
-
+const pauseb = document.getElementById("pause-button");
+const ssb = document.getElementById("spaceship-button");
+const rpentaminob = document.getElementById("rpentamino-button");
 // graphics
 let CELL_SIZE = 15; // px
 const MARGIN = 20;
@@ -25,6 +27,7 @@ canvas.height = (CELL_SIZE + 1) * height + 1;
 canvas.width = (CELL_SIZE + 1) * width + 1;
 
 const ctx = canvas.getContext("2d");
+let running = false;
 
 const renderLoop = () => {
   universe.tick();
@@ -32,7 +35,9 @@ const renderLoop = () => {
   drawGrid();
   drawCells();
 
-  requestAnimationFrame(renderLoop);
+  if (running) {
+    requestAnimationFrame(renderLoop);
+  }
 };
 
 const drawGrid = () => {
@@ -62,7 +67,25 @@ canvas.addEventListener("mousedown", function () {
   drawCells();
 });
 gob.addEventListener("mousedown", function () {
+  running = true;
   requestAnimationFrame(renderLoop);
+});
+pauseb.addEventListener("mousedown", function () {
+  running = false;
+});
+
+ssb.addEventListener("mousedown", function () {
+  running = false;
+  universe.make_spaceship();
+  drawGrid();
+  drawCells();
+});
+
+rpentaminob.addEventListener("mousedown", function () {
+  running = false;
+  universe.make_rpentamino();
+  drawGrid();
+  drawCells();
 });
 
 // pre.dblclick(requestAnimationFrame(renderLoop));
