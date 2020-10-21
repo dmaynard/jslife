@@ -3,11 +3,13 @@ import { Universe, Cell } from "wasm-game-of-life";
 import { memory } from "wasm-game-of-life/wasm_game_of_life_bg";
 import { universe_width } from "wasm-game-of-life/wasm_game_of_life_bg.wasm";
 
-const pre = document.getElementById("game-of-life-canvas");
+// const pre = document.getElementById("game-of-life-canvas");
 const gob = document.getElementById("go-button");
-const pauseb = document.getElementById("pause-button");
 const ssb = document.getElementById("spaceship-button");
 const rpentaminob = document.getElementById("rpentamino-button");
+const piheptominob = document.getElementById("piheptomino-button");
+const gliderb = document.getElementById("glider-button");
+
 // graphics
 let CELL_SIZE = 15; // px
 const MARGIN = 20;
@@ -67,11 +69,14 @@ canvas.addEventListener("mousedown", function () {
   drawCells();
 });
 gob.addEventListener("mousedown", function () {
-  running = true;
-  requestAnimationFrame(renderLoop);
-});
-pauseb.addEventListener("mousedown", function () {
-  running = false;
+  if (running) {
+    running = false;
+    gob.innerHTML = "  Go  ";
+  } else {
+    running = true;
+    gob.innerHTML = "Pause";
+    requestAnimationFrame(renderLoop);
+  }
 });
 
 ssb.addEventListener("mousedown", function () {
@@ -79,6 +84,7 @@ ssb.addEventListener("mousedown", function () {
   universe.make_spaceship();
   drawGrid();
   drawCells();
+  gob.innerHTML = "Go";
 });
 
 rpentaminob.addEventListener("mousedown", function () {
@@ -86,10 +92,26 @@ rpentaminob.addEventListener("mousedown", function () {
   universe.make_rpentamino();
   drawGrid();
   drawCells();
+  gob.innerHTML = "Go";
+});
+piheptominob.addEventListener("mousedown", function () {
+  running = false;
+  universe.make_piheptomino();
+  drawGrid();
+  drawCells();
+  gob.innerHTML = "Go";
+});
+
+gliderb.addEventListener("mousedown", function () {
+  running = false;
+  universe.make_glider();
+  drawGrid();
+  drawCells();
+  gob.innerHTML = "Go";
 });
 
 // pre.dblclick(requestAnimationFrame(renderLoop));
-//
+
 const getIndex = (row, column) => {
   return row * width + column;
 };
@@ -121,12 +143,8 @@ const drawCells = () => {
 console.log("Executing top level script code");
 
 const getCellSize = () => {
-  let sizeW = Math.floor(
-    (window.innerWidth - 2 * MARGIN) / (universe.width() + 1)
-  );
-  let sizeH = Math.floor(
-    (window.innerHeight - 2 * MARGIN) / (universe.height() + 1)
-  );
+  let sizeW = Math.floor((window.innerWidth - 2 * MARGIN) / universe.width());
+  let sizeH = Math.floor((window.innerHeight - 100) / universe.height());
   return Math.min(sizeW, sizeH);
 };
 
@@ -134,7 +152,7 @@ function resizeCanvas() {
   console.log(" Resize (" + window.innerWidth + "," + window.innerHeight + ")");
   CELL_SIZE = getCellSize();
   canvas.width = (CELL_SIZE + 1) * universe.width() + 2 * MARGIN;
-  canvas.height = (CELL_SIZE + 1) * universe.height() + 2 * MARGIN;
+  canvas.height = (CELL_SIZE + 1) * universe.height();
 
   drawGrid();
   drawCells();
