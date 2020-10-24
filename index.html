@@ -20,11 +20,17 @@
   <body>
     <canvas id="game-of-life-canvas"></canvas>
     <span>
-      <button id="go-button">Go</button>
+      <button id="go-button">▶</button>
+      <button id="step-button">&#x23F9;</button>
       <button id="spaceship-button">Space Ship</button>
       <button id="rpentamino-button">R-Pentamino</button>
       <button id="piheptomino-button">Pi-Heptomino</button>
       <button id="glider-button">Glider</button>
+      <button id="test-button">Fix Cell Size</button>
+    </span>
+    <span>
+      <label> Life Universe Size: </label>
+      <input type="number" id="universe-size" value="32" min="10" max="1000" />
     </span>
     <script src="./bootstrap.js"></script>
   </body>
