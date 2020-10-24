@@ -3,7 +3,7 @@ import { Universe, Cell } from "wasm-game-of-life";
 import { memory } from "wasm-game-of-life/wasm_game_of_life_bg";
 import { universe_width } from "wasm-game-of-life/wasm_game_of_life_bg.wasm";
 
-// const pre = document.getElementById("game-of-life-canvas");
+const playfield = document.getElementById("game-of-life-canvas");
 const gob = document.getElementById("go-button");
 const ssb = document.getElementById("spaceship-button");
 const rpentaminob = document.getElementById("rpentamino-button");
@@ -121,17 +121,7 @@ gliderb.addEventListener("mousedown", function () {
   drawCells();
   gob.innerHTML = "▶";
 });
-testb.addEventListener("mousedown", function () {
-  pause();
-  if (fixedUniverseSize) {
-    fixedUniverseSize = false;
-    testb.innerHTML = "Fix Universe Size";
-  } else {
-    fixedUniverseSize = true;
-    testb.innerHTML = "Fix Cell Size";
-  }
-  gob.innerHTML = "▶";
-});
+
 sizeb.addEventListener("input", function () {
   console.log(" Universe Size " + sizeb.value);
   let newSize = parseInt(sizeb.value);
@@ -144,6 +134,23 @@ sizeb.addEventListener("input", function () {
     drawCells();
     pause();
   }
+});
+canvas.addEventListener("click", (event) => {
+  const boundingRect = canvas.getBoundingClientRect();
+
+  const scaleX = canvas.width / boundingRect.width;
+  const scaleY = canvas.height / boundingRect.height;
+
+  const canvasLeft = (event.clientX - boundingRect.left) * scaleX;
+  const canvasTop = (event.clientY - boundingRect.top) * scaleY;
+
+  const row = Math.min(Math.floor(canvasTop / (CellSize + 1)), height - 1);
+  const col = Math.min(Math.floor(canvasLeft / (CellSize + 1)), width - 1);
+
+  universe.toggle_cell(row, col);
+
+  drawGrid();
+  drawCells();
 });
 
 // pre.dblclick(requestAnimationFrame(renderLoop));
