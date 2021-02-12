@@ -1,7 +1,7 @@
-import { Universe, Cell } from "wasm-game-of-life";
+import { Universe, Cell } from "wasm-game-of-life-dsmaynard";
 // Import the WebAssembly memory at the top of the file.
-import { memory } from "wasm-game-of-life/wasm_game_of_life_bg";
-import { universe_width } from "wasm-game-of-life/wasm_game_of_life_bg.wasm";
+import { memory } from "wasm-game-of-life-dsmaynard/wasm_game_of_life_dsmaynard_bg";
+// import { universe_width } from "wasm-game-of-life/wasm_game_of_life_bg.wasm";
 
 const playfield = document.getElementById("game-of-life-canvas");
 const gob = document.getElementById("go-button");
@@ -13,7 +13,7 @@ const testb = document.getElementById("test-button");
 const sizeb = document.getElementById("universe-size");
 const stepb = document.getElementById("step-button");
 // graphics
-let CellSize = 15; // px
+let CellSize = 16; // px
 const MARGIN = 20;
 const GRID_COLOR = "#CCCCCC";
 const DEAD_COLOR = "#FFFFFF";
