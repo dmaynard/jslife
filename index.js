@@ -1,6 +1,7 @@
-import { Universe, Cell } from "wasm-game-of-life-dsmaynard";
-// Import the WebAssembly memory at the top of the file.
-import { memory } from "wasm-game-of-life-dsmaynard/wasm_game_of_life_dsmaynard_bg";
+// import { Universe, Cell } from "wasm-game-of-life-dsmaynard";
+// import { memory } from "wasm-game-of-life-dsmaynard/wasm_game_of_life_dsmaynard_bg";
+import { Universe, Cell } from "wasm-game-of-life";
+import { memory } from "wasm-game-of-life/wasm_game_of_life_bg";
 // import { universe_width } from "wasm-game-of-life/wasm_game_of_life_bg.wasm";
 
 const playfield = document.getElementById("game-of-life-canvas");
