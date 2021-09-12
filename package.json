@@ -1,7 +1,7 @@
 {
-  "name": "create-wasm-app",
+  "name": "life-js-ui",
   "version": "0.1.0",
-  "description": "create an app to consume rust-generated wasm packages",
+  "description": "The Javascript ui which calls rust-wasm life implementation",
   "main": "index.js",
   "bin": {
     "create-wasm-app": ".bin/create-wasm-app.js"
@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/rustwasm/create-wasm-app#readme",
   "dependencies": {
-    "@davidsmaynard/wasm-game-of-life": "^0.1.2"
+    "wasm-game-of-life": "file:../pkg"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.1.2",
