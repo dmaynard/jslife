@@ -1,7 +1,7 @@
-import { Universe, Cell } from "wasm-game-of-life";
-import { memory } from "wasm_game_of_life_bg";
-// import { Universe, Cell } from "@davidsmaynard/wasm-game-of-life";
-// import { memory } from "@davidsmaynard/wasm-game-of-life/wasm_game_of_life_bg";
+// import { Universe, Cell } from "davidsmaynard/wasm-game-of-life";
+// import { memory } from "davidsmaynard/wasm_game_of_life";
+import { Universe, Cell } from "@davidsmaynard/wasm-game-of-life";
+import { memory } from "@davidsmaynard/wasm-game-of-life/wasm_game_of_life_bg";
 // import { universe_width } from "wasm-game-of-life/wasm_game_of_life_bg.wasm";
 
 const playfield = document.getElementById("game-of-life-canvas");
