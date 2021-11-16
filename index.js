@@ -255,8 +255,8 @@ const fps = new (class {
 
     // Render the statistics.
     this.fps2.textContent = `
-Frames per Second: ${Math.round(mean)}
-`.trim();
+fps: ${Math.round(mean)}
++ "Generations: " + ${universe.generations()}`.trim() 
   }
 })();
 window.addEventListener("resize", resizeCanvas);
